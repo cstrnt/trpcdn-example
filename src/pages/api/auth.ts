@@ -4,7 +4,7 @@ import crypto from "crypto";
 export default function authHandler(req: NextApiRequest, res: NextApiResponse) {
   if (!req.cookies["session"]) {
     const sessionKey = crypto.randomBytes(16).toString("hex");
-    res.setHeader("Set-Cookie", `session=${sessionKey}; HttpOnly`);
+    res.setHeader("Set-Cookie", `session=${sessionKey}; HttpOnly; Path=/`);
   }
   return res.status(200).json({ name: "John Doe" });
 }
