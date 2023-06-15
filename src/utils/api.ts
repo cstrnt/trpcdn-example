@@ -38,12 +38,13 @@ export const api = createTRPCNext<AppRouter>({
             process.env.NODE_ENV === "development" ||
             (opts.direction === "down" && opts.result instanceof Error),
         }),
-        httpLink({
+        // httpLink({
+        //   url: process.env.NODE_ENV === "development" ? "http://localhost:8000/example": "https://trpcdn.deno.dev/abby",
+        // })
+        httpBatchLink({
           url: process.env.NODE_ENV === "development" ? "http://localhost:8000/example": "https://trpcdn.deno.dev/abby",
-        })
-        // httpBatchLink({
-        //   url: `${getBaseUrl()}/api/trpc`,
-        // }),
+          // url: getBaseUrl() + "/api/trpc",
+        }),
       ],
     };
   },
